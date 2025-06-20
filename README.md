@@ -338,8 +338,128 @@ void cargarDatos(){
     cargarNavesDesdeArchivo("naves.txt");
     cargarRutasDesdeArchivo("rutas.txt");
     cargarViajesDesdeArchivo("viajes.txt");
+
+    enlazarNaveViaje(201, 1003);
+    enlazarNaveViaje(201, 1001);
+    enlazarNaveViaje(202, 1002);
+    enlazarNaveViaje(203, 1003);
+    enlazarNaveViaje(204, 1004);
+    enlazarNaveViaje(205, 1005);
+    enlazarNaveViaje(206, 1006);
+    enlazarNaveViaje(207, 1007);
+    enlazarNaveViaje(208, 1008);
+    enlazarNaveViaje(209, 1009);
+    enlazarNaveViaje(210, 1010);
+
 }
 
+/*Funciones para eliminar datos*/
+
+// Elimina una galaxia por su ID
+void eliminarGalaxia(int id) {
+    Galaxia *buscar = StarCluster;
+    Galaxia *ant = nullptr;
+
+    while (buscar != nullptr && buscar->codigo != id) {
+        ant = buscar;
+        buscar = buscar->sig;
+    }
+
+    if (buscar != nullptr) {
+        if (ant == nullptr) {
+            StarCluster = buscar->sig;
+        }
+        else {
+            ant->sig = buscar->sig;
+        }
+        delete buscar;
+        cout << "Galaxia eliminada con éxito." << endl;
+    } 
+    
+    else {
+        cout << "La galaxia no ha sido encontrada." << endl;
+    }
+}
+
+
+// Elimina una nave por su id
+void eliminarNave(int id) {
+    Nave *buscar = Naves;
+    Nave *ant = nullptr;
+
+    while (buscar != nullptr && buscar->identificador != id) {
+        ant = buscar;
+        buscar = buscar->sig;
+    }
+
+    if (buscar != nullptr) {
+        if (ant == nullptr) {
+            Naves = buscar->sig;
+        }
+        else {
+            ant->sig = buscar->sig;
+        }
+        delete buscar;
+        cout << "La nave ha sido eliminada con éxito." << endl;
+    } 
+    
+    else {
+        cout << "La nave no ha sido encontrada." << endl;
+    }
+}
+
+// Elimina una ruta
+void eliminarRuta(int orig, int dest, double costo) {
+    Ruta *buscar = Route;
+    Ruta *ant = nullptr;
+
+    while (buscar != nullptr && !(buscar->origen == orig && buscar->destino == dest && buscar->costo == costo)) {
+        ant = buscar;
+        buscar = buscar->sig;
+    }
+
+    
+    if (buscar != nullptr) {
+        if (ant == nullptr) {
+            Route = buscar->sig;
+        } 
+        else {
+            ant->sig = buscar->sig;
+        }
+        delete buscar;
+        cout << "Ruta eliminada con éxito." << endl;
+    } 
+    else {
+        cout << "La ruta no ha sido encontrada." << endl;
+    }
+}
+
+
+// Elimina un viaje por su ID
+void eliminarViaje(int id) {
+    Viaje *buscar = Trips;
+    Viaje *ant = nullptr;
+
+    while (buscar != nullptr && buscar->identificador != id) {
+        ant = buscar;
+        buscar = buscar->sig;
+    }
+
+    if (buscar != nullptr) {
+        if (ant == nullptr) {
+            Trips = buscar->sig;
+        }
+        else {
+            ant->sig = buscar->sig;
+        }
+        delete buscar;
+        cout << "El viaje ha sido eliminado con éxito." << endl;
+    } 
+    
+    else {
+        cout << "El viaje no ha sido encontrado." << endl;
+    }
+}
 
 /*Funciones de Kruskal*/
 
@@ -394,7 +514,7 @@ void rutaDeMenorCosto(int idOrig, int idDest){
     }
 }
 
-
+/*
 //Mostrar árbol de expansión
 void imprimirArbolExpansion(const vector<Ruta*>& arbol) {
     cout << "Árbol de expansión resultante (Kruskal modificado):\n";
@@ -402,6 +522,7 @@ void imprimirArbolExpansion(const vector<Ruta*>& arbol) {
         cout << "Origen: " << r->origen << " -> Destino: " << r->destino << " | Costo: " << r->costo << "\n";
     }
 }
+*/
 
 // Muestra el historial de viajes de una nave
 void mostrarHistorialViajesNave(int idNave) {
@@ -471,3 +592,4 @@ int main(){
     cargarDatos();
     return 0;
 }
+
