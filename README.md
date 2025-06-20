@@ -469,10 +469,5 @@ void historialViajesTodasNaves() {
 
 int main(){
     cargarDatos();
-    vector<Ruta*> arbol = kruskalModificado(Route);
-    imprimirArbolExpansion(arbol);
-    mostrarRutasGalaxia(101);
-    rutaDeMenorCosto(101, 106);
-
     return 0;
 }
