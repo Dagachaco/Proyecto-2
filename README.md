@@ -100,6 +100,18 @@ struct subViajes {
     }
 };
 
+//Estructura para la arista kruskal
+struct AristaKruskal {
+    int origen;
+    int destino;
+    double peso;
+    
+    //Constructor para la arista kruskal
+    
+    AristaKruskal(int o, int d, double p) : origen(o), destino(d), peso(p) {}
+};
+
+
 
 /* Parte de validaciones de datos */
 
